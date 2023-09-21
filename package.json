@@ -1,0 +1,12 @@
+{
+  "name": "4inaline",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/brunomachadors/4inaline.git",
+  "author": "ca-trindade <piratum.core@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "styled-components": "^6.0.8"
+  }
+}
