@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Square from "../Square";
 
 const Board = () => {
-  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [squares, setSquares] = useState(Array(42).fill(null));
 
   const handleClick = (i) => {
     const newSquares = squares.slice();
