@@ -1,5 +1,5 @@
 body {
-  font: 14px "Century Gothic", Futura, sans-serif;
+  font: 14px 'Century Gothic', Futura, sans-serif;
   margin: 20px;
   background-color: #e1e1e1;
 }
@@ -9,9 +9,14 @@ ul {
   padding-left: 30px;
 }
 
-.board-row:after {
+.board-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.board-column:after {
   clear: both;
-  content: "";
+  content: '';
   display: table;
 }
 

@@ -1,15 +1,22 @@
-import React, { useState } from "react";
-import Square from "../Square";
+import React, { useState } from 'react';
+import Square from '../Square';
 
 const Board = () => {
   const [squares, setSquares] = useState(Array(42).fill(null));
+  const [xIsNext, setXIsNext] = useState(true);
 
   const handleClick = (i) => {
+    console.log(i);
     const newSquares = squares.slice();
 
-    newSquares[i] = "O";
+    if (xIsNext) {
+      newSquares[i] = 'X';
+    } else {
+      newSquares[i] = 'O';
+    }
 
     setSquares(newSquares);
+    setXIsNext(!xIsNext);
   };
 
   const renderSquare = (i) => {
@@ -17,60 +24,63 @@ const Board = () => {
   };
 
   return (
-    <div>
-      <div className="board-row">
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-        {renderSquare(6)}
-      </div>
-      <div className="board-row">
-        {renderSquare(7)}
-        {renderSquare(8)}
-        {renderSquare(9)}
-        {renderSquare(10)}
+    <div className="game">
+      <div className="board-column">
         {renderSquare(11)}
         {renderSquare(12)}
         {renderSquare(13)}
-      </div>
-      <div className="board-row">
         {renderSquare(14)}
         {renderSquare(15)}
         {renderSquare(16)}
-        {renderSquare(17)}
-        {renderSquare(18)}
-        {renderSquare(19)}
-        {renderSquare(20)}
       </div>
-      <div className="board-row">
+      <div className="board-column">
         {renderSquare(21)}
         {renderSquare(22)}
         {renderSquare(23)}
         {renderSquare(24)}
         {renderSquare(25)}
         {renderSquare(26)}
-        {renderSquare(27)}
       </div>
-      <div className="board-row">
-        {renderSquare(28)}
-        {renderSquare(29)}
-        {renderSquare(30)}
+      <div className="board-column">
         {renderSquare(31)}
         {renderSquare(32)}
         {renderSquare(33)}
         {renderSquare(34)}
-      </div>
-      <div className="board-row">
         {renderSquare(35)}
         {renderSquare(36)}
-        {renderSquare(37)}
-        {renderSquare(38)}
-        {renderSquare(39)}
-        {renderSquare(40)}
+      </div>
+      <div className="board-column">
         {renderSquare(41)}
+        {renderSquare(42)}
+        {renderSquare(43)}
+        {renderSquare(44)}
+        {renderSquare(45)}
+        {renderSquare(46)}
+      </div>
+      <div className="board-column">
+        {renderSquare(51)}
+        {renderSquare(52)}
+        {renderSquare(53)}
+        {renderSquare(54)}
+        {renderSquare(55)}
+        {renderSquare(56)}
+      </div>
+      <div className="board-column">
+        {renderSquare(61)}
+        {renderSquare(62)}
+        {renderSquare(63)}
+        {renderSquare(64)}
+        {renderSquare(65)}
+        {renderSquare(66)}
+      </div>
+
+      <div className="board-column">
+        {renderSquare(71)}
+        {renderSquare(72)}
+        {renderSquare(73)}
+        {renderSquare(74)}
+        {renderSquare(75)}
+        {renderSquare(76)}
       </div>
     </div>
   );
