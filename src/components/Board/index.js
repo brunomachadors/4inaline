@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import Square from '../Square';
+import React, { useState, Fragment } from 'react';
 
 const Board = (props) => {
   const [squares, setSquares] = useState(Array(42).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const { numberOfColumns, numberOfLines } = props;
-  const gameMatrix = new Array(numberOfLines).fill(
-    new Array(numberOfColumns).fill(undefined)
+  const gameMatrix = new Array(numberOfColumns).fill(
+    new Array(numberOfLines).fill(undefined)
   );
 
   const handleClick = (i) => {
@@ -24,11 +23,15 @@ const Board = (props) => {
   };
 
   return (
-    <>
-      {gameMatrix.map((line) => (
-        <div style={{ display: 'flex' }}>
-          {line.map((column) => (
+    <div style={{ display: 'flex' }}>
+      {gameMatrix.map((column, index) => (
+        <div
+          key={`column-${index}`}
+          style={{ display: 'flex', flexDirection: 'column' }}
+        >
+          {column.map((line, index) => (
             <div
+              key={`line-${index}`}
               style={{
                 margin: '4px',
                 width: '20px',
@@ -37,9 +40,10 @@ const Board = (props) => {
               }}
             ></div>
           ))}
+          <button type="button">{index + 1}</button>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
