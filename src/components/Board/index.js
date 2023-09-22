@@ -1,5 +1,4 @@
-import React, { useState, Fragment } from "react";
-import Square from "../Square";
+import React, { useState, Fragment } from 'react';
 
 const Board = (props) => {
   const [squares, setSquares] = useState(Array(42).fill(null));
@@ -27,19 +26,21 @@ const Board = (props) => {
   return (
     <div style={{ display: 'flex' }}>
       {gameMatrix.map((column, index) => (
-        <div key={`column-${index}`} style={{ display: "flex", flexDirection: 'column' }}>
+        <div
+          key={`column-${index}`}
+          style={{ display: 'flex', flexDirection: 'column' }}
+        >
           {column.map((line, index) => (
-                <div
-                  key={`line-${index}`}
-                  style={{
-                    margin: "4px",
-                    width: "20px",
-                    height: "20px",
-                    backgroundColor: "green",
-                  }}
-                ></div>
-            )
-          )}
+            <div
+              key={`line-${index}`}
+              style={{
+                margin: '4px',
+                width: '20px',
+                height: '20px',
+                backgroundColor: 'green',
+              }}
+            ></div>
+          ))}
           <button type="button">{index + 1}</button>
         </div>
       ))}
