@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { insertCoin } from '../../utils/gameRules.js';
 
 const Board = (props) => {
-  const [squares, setSquares] = useState(Array(42).fill(null));
-  const [xIsNext, setXIsNext] = useState(true);
-  const { numberOfColumns, numberOfLines } = props;
-  const gameMatrix = new Array(numberOfColumns).fill(
-    new Array(numberOfLines).fill(undefined)
-  );
-
-  const handleClick = (i) => {
+  /*const [squares, setSquares] = useState(Array(42).fill(null));
+  const [xIsNext, setXIsNext] = useState(true);*/
+  /*const handleClick = (i) => {
     console.log(i);
     const newSquares = squares.slice();
 
@@ -20,7 +16,12 @@ const Board = (props) => {
 
     setSquares(newSquares);
     setXIsNext(!xIsNext);
-  };
+  };*/
+
+  const { numberOfColumns, numberOfLines } = props;
+  const gameMatrix = new Array(numberOfColumns).fill(
+    new Array(numberOfLines).fill(null)
+  );
 
   return (
     <div style={{ display: 'flex' }}>
@@ -40,7 +41,12 @@ const Board = (props) => {
               }}
             ></div>
           ))}
-          <button type="button">{index + 1}</button>
+          <button
+            type="button"
+            onClick={() => insertCoin(gameMatrix[0], 'red')}
+          >
+            {index + 1}
+          </button>
         </div>
       ))}
     </div>
