@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 
 const Board = (props) => {
   const [squares, setSquares] = useState(Array(42).fill(null));
