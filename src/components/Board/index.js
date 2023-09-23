@@ -32,7 +32,6 @@ export function Board({ numberOfColumns, numberOfRows }) {
           }
 
           setBoardState(updatedBoardState);
-          //console.log(updatedBoardState);
           checkWin(updatedBoardState, player);
         }}
       >
