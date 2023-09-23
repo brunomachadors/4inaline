@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { checkWin } from '../../utils/checkWin';
 
 export function Board({ numberOfColumns, numberOfRows }) {
   const [player, setPlayer] = useState('red');
@@ -31,6 +32,8 @@ export function Board({ numberOfColumns, numberOfRows }) {
           }
 
           setBoardState(updatedBoardState);
+          //console.log(updatedBoardState);
+          checkWin(updatedBoardState, player);
         }}
       >
         {column + 1}
