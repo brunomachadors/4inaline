@@ -1,51 +1,66 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
+import { checkWin } from '../../utils/checkWin';
 
-const Board = (props) => {
-  const [squares, setSquares] = useState(Array(42).fill(null));
-  const [xIsNext, setXIsNext] = useState(true);
-  const { numberOfColumns, numberOfLines } = props;
-  const gameMatrix = new Array(numberOfColumns).fill(
-    new Array(numberOfLines).fill(undefined)
-  );
-  const buttonArray = new Array(7);
+export function Board({ numberOfColumns, numberOfRows }) {
+  const [player, setPlayer] = useState('red');
+  const [boardState, setBoardState] = useState(() => {
+    return Array.from({ length: numberOfRows }).map(() =>
+      Array.from({ length: numberOfColumns }).map(() => null)
+    );
+  });
 
-  const handleClick = (i) => {
-    console.log(i);
-    const newSquares = squares.slice();
+  const buttons = [];
+  for (let column = 0; column < numberOfColumns; column++) {
+    buttons.push(
+      <button
+        key={column}
+        style={{
+          margin: '4px',
+          padding: '0px',
+          width: '40px',
+          height: '40px',
+          cursor: 'pointer',
+        }}
+        onClick={() => {
+          setPlayer(player === 'red' ? 'green' : 'red');
+          const updatedBoardState = structuredClone(boardState);
+          for (let row = numberOfRows - 1; row >= 0; row--) {
+            if (updatedBoardState[row][column] === null) {
+              updatedBoardState[row][column] = player;
+              break;
+            }
+          }
 
-    if (xIsNext) {
-      newSquares[i] = "X";
-    } else {
-      newSquares[i] = "O";
-    }
-
-    setSquares(newSquares);
-    setXIsNext(!xIsNext);
-  };
+          setBoardState(updatedBoardState);
+          checkWin(updatedBoardState, player);
+        }}
+      >
+        {column + 1}
+      </button>
+    );
+  }
 
   return (
-    <div style={{ display: 'flex' }}>
-      {gameMatrix.map((column, index) => (
-        <div
-          key={`column-${index}`}
-          style={{ display: 'flex', flexDirection: 'column' }}
-        >
-          {column.map((line, index) => (
+    <>
+      {boardState.map((row, rowIndex) => (
+        <div key={`row-${rowIndex}`} style={{ display: 'flex' }}>
+          {row.map((column, columnIndex) => (
             <div
-              key={`line-${index}`}
+              key={`row-${columnIndex}`}
               style={{
                 margin: '4px',
-                width: '20px',
-                height: '20px',
-                backgroundColor: 'green',
+                width: '40px',
+                height: '40px',
+                backgroundColor: column,
+                border: '1px solid black',
               }}
-            ></div>
+            >
+              {rowIndex} - {columnIndex}
+            </div>
           ))}
-          <button type="button">{index + 1}</button>
         </div>
       ))}
-    </div>
+      {buttons}
+    </>
   );
-};
-
-export default Board;
+}
