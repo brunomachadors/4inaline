@@ -23,7 +23,7 @@ export function Board({ numberOfColumns, numberOfRows }) {
         }}
         onClick={() => {
           setPlayer(player === 'red' ? 'green' : 'red');
-          const updatedBoardState = structuredClone(boardState);
+          let updatedBoardState = structuredClone(boardState);
           for (let row = numberOfRows - 1; row >= 0; row--) {
             if (updatedBoardState[row][column] === null) {
               updatedBoardState[row][column] = player;
