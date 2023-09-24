@@ -4,7 +4,7 @@ The four in a row rules are very simple. It’s always played with 2 players and
 
 - [x] Board
 - [x] Game Rules
-- [ ] Styling
+- [x] Styling
 - [ ] Animation
 
 ## Available Scripts
