@@ -3,19 +3,29 @@ import { checkWin } from '../../utils/checkWin';
 import {
   RowUi,
   ButtonUi,
-  ButtonsUi,
   ColumnUi,
   BoardUi,
   ButtonImageUi,
   Title,
+  WinnerTitle,
+  PlayAgainButton,
+  PlayerColor,
+  Player1ColorCircle,
+  Player2ColorCircle,
+  ButtonsContainer,
 } from './style';
+import { createBoard } from '../../utils/createBoard';
+
+const PLAYER_COLORS = {
+  'Player 1': 'red',
+  'Player 2': 'green',
+};
 
 export function Board({ numberOfColumns, numberOfRows }) {
-  const [player, setPlayer] = useState('red');
+  const [winner, setWinner] = useState(null);
+  const [player, setPlayer] = useState('Player 1');
   const [boardState, setBoardState] = useState(() => {
-    return Array.from({ length: numberOfRows }).map(() =>
-      Array.from({ length: numberOfColumns }).map(() => null)
-    );
+    return createBoard(numberOfColumns, numberOfRows);
   });
 
   const buttons = [];
@@ -23,8 +33,8 @@ export function Board({ numberOfColumns, numberOfRows }) {
     buttons.push(
       <ButtonUi
         key={column}
+        disabled={winner !== null}
         onClick={() => {
-          setPlayer(player === 'red' ? 'green' : 'red');
           let updatedBoardState = structuredClone(boardState);
           for (let row = numberOfRows - 1; row >= 0; row--) {
             if (updatedBoardState[row][column] === null) {
@@ -34,26 +44,52 @@ export function Board({ numberOfColumns, numberOfRows }) {
           }
 
           setBoardState(updatedBoardState);
-          checkWin(updatedBoardState, player);
+          setPlayer(player === 'Player 1' ? 'Player 2' : 'Player 1');
+          if (checkWin(updatedBoardState, player)) {
+            setWinner(player);
+          }
         }}
       >
         <ButtonImageUi src="https://cdn-icons-png.flaticon.com/512/55/55008.png"></ButtonImageUi>
-        {column + 1}
       </ButtonUi>
     );
   }
 
+  const handlePlayAgainClick = () => {
+    startGame();
+  };
+
+  const startGame = () => {
+    setPlayer('Player 1');
+    setWinner(null);
+    setBoardState(createBoard(numberOfColumns, numberOfRows));
+  };
+
+  const isGameDraw =
+    !winner &&
+    boardState.every((row) => row.every((column) => column !== null));
+
   return (
     <>
       <Title>4 in a line</Title>
+
+      <PlayerColor>
+        Player 1 color:
+        <Player1ColorCircle />
+      </PlayerColor>
+
+      <PlayerColor>
+        Player 2 color:
+        <Player2ColorCircle />
+      </PlayerColor>
+
       {boardState.map((row, rowIndex) => (
         <BoardUi>
-          <RowUi key={`row-${rowIndex}`}>
+          <RowUi>
             {row.map((column, columnIndex) => (
               <ColumnUi
-                key={`row-${columnIndex}`}
                 style={{
-                  backgroundColor: column,
+                  backgroundColor: PLAYER_COLORS[column],
                 }}
               >
                 {rowIndex} - {columnIndex}
@@ -62,7 +98,16 @@ export function Board({ numberOfColumns, numberOfRows }) {
           </RowUi>
         </BoardUi>
       ))}
-      <ButtonsUi>{buttons}</ButtonsUi>
+      <ButtonsContainer>{buttons}</ButtonsContainer>
+
+      <PlayAgainButton onClick={handlePlayAgainClick}>
+        Play again
+      </PlayAgainButton>
+
+      {winner && <WinnerTitle>The winner is {winner}!</WinnerTitle>}
+      {isGameDraw && (
+        <WinnerTitle>There were no winners, play again!</WinnerTitle>
+      )}
     </>
   );
 }

@@ -20,11 +20,10 @@ export function checkWin(board, player) {
 function checkVerticalWinner(board, row, col, player) {
   if (
     board[row][col] === player &&
-    board[row - 1][col] === player &&
-    board[row - 2][col] === player &&
-    board[row - 3][col] === player
+    board[row - 1]?.[col] === player &&
+    board[row - 2]?.[col] === player &&
+    board[row - 3]?.[col] === player
   ) {
-    console.log('WINNER  VERTICAL ' + player);
     return true;
   }
 }
@@ -32,11 +31,10 @@ function checkVerticalWinner(board, row, col, player) {
 function checkHorizontalWinner(board, row, col, player) {
   if (
     board[row][col] === player &&
-    board[row][col + 1] === player &&
-    board[row][col + 2] === player &&
-    board[row][col + 3] === player
+    board[row]?.[col + 1] === player &&
+    board[row]?.[col + 2] === player &&
+    board[row]?.[col + 3] === player
   ) {
-    console.log('WINNER HORIZONTAL' + player);
     return true;
   }
 }
@@ -44,19 +42,17 @@ function checkHorizontalWinner(board, row, col, player) {
 function checkDiagonalWinner(board, row, col, player) {
   if (
     board[row][col] === player &&
-    board[row - 1][col + 1] === player &&
-    board[row - 2][col + 2] === player &&
-    board[row - 3][col + 3] === player
+    board[row - 1]?.[col + 1] === player &&
+    board[row - 2]?.[col + 2] === player &&
+    board[row - 3]?.[col + 3] === player
   ) {
-    console.log('WINNER LEFT TO RIGHT ' + player);
     return true;
   } else if (
     board[row][col] === player &&
-    board[row - 1][col - 1] === player &&
-    board[row - 2][col - 2] === player &&
-    board[row - 3][col - 3] === player
+    board[row - 1]?.[col - 1] === player &&
+    board[row - 2]?.[col - 2] === player &&
+    board[row - 3]?.[col - 3] === player
   ) {
-    console.log('WINNER RIGHT TO LEFT ' + player);
     return true;
   }
 }

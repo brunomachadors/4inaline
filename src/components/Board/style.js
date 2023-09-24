@@ -42,17 +42,50 @@ export const ButtonUi = styled.button`
   box-shadow: 5px 2px 2px black;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
 `;
 
-export const ButtonsUi = styled.div`
+export const ButtonsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
 `;
 
 export const ButtonImageUi = styled.img`
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
+`;
+
+export const PlayerColor = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Player1ColorCircle = styled.div`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-left: 10px;
+  background-color: red;
+`;
+
+export const Player2ColorCircle = styled.div`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-left: 10px;
+  background-color: green;
+`;
+
+export const WinnerTitle = styled.h2`
+  text-align: center;
+`;
+
+export const PlayAgainButton = styled.button`
+  display: flex;
+  align-items: center;
+  margin: 10px auto;
+  height: 30px;
 `;
