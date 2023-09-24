@@ -3,7 +3,7 @@ The four in a row rules are very simple. It’s always played with 2 players and
 ## TASKS:
 
 - [x] Board
-- [ ] Game Rules
+- [x] Game Rules
 - [ ] Styling
 - [ ] Animation
 
