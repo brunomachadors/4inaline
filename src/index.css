@@ -1,38 +1,10 @@
 body {
-  font: 14px 'Century Gothic', Futura, sans-serif;
+  font: 16px 'Century Gothic', Futura, sans-serif;
   margin: 20px;
   background-color: #e1e1e1;
 }
-
-ol,
-ul {
-  padding-left: 30px;
-}
-
-.board-column {
+​ #root {
   display: flex;
   flex-direction: column;
-}
-
-.board-column:after {
-  clear: both;
-  content: '';
-  display: table;
-}
-
-.status {
-  margin-bottom: 10px;
-}
-
-.kbd-navigation .square:focus {
-  background: #ddd;
-}
-
-.game {
-  display: flex;
-  flex-direction: row;
-}
-
-.game-info {
-  margin-left: 20px;
+  justify-content: center;
 }
