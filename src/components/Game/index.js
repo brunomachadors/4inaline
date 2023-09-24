@@ -1,13 +1,7 @@
-import Board from "../Board";
+import { Board } from '../Board';
 
 const Game = () => {
-  return (
-    <div className="game">
-      <div className="game-board">
-        <Board />
-      </div>
-    </div>
-  );
+  return <Board numberOfColumns={7} numberOfRows={6} />;
 };
 
 export default Game;

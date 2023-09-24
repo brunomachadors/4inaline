@@ -1,79 +1,66 @@
-import React, { useState } from "react";
-import Square from "../Square";
+import React, { useState } from 'react';
+import { checkWin } from '../../utils/checkWin';
 
-const Board = () => {
-  const [squares, setSquares] = useState(Array(42).fill(null));
+export function Board({ numberOfColumns, numberOfRows }) {
+  const [player, setPlayer] = useState('red');
+  const [boardState, setBoardState] = useState(() => {
+    return Array.from({ length: numberOfRows }).map(() =>
+      Array.from({ length: numberOfColumns }).map(() => null)
+    );
+  });
 
-  const handleClick = (i) => {
-    const newSquares = squares.slice();
+  const buttons = [];
+  for (let column = 0; column < numberOfColumns; column++) {
+    buttons.push(
+      <button
+        key={column}
+        style={{
+          margin: '4px',
+          padding: '0px',
+          width: '40px',
+          height: '40px',
+          cursor: 'pointer',
+        }}
+        onClick={() => {
+          setPlayer(player === 'red' ? 'green' : 'red');
+          let updatedBoardState = structuredClone(boardState);
+          for (let row = numberOfRows - 1; row >= 0; row--) {
+            if (updatedBoardState[row][column] === null) {
+              updatedBoardState[row][column] = player;
+              break;
+            }
+          }
 
-    newSquares[i] = "O";
-
-    setSquares(newSquares);
-  };
-
-  const renderSquare = (i) => {
-    return <Square value={squares[i]} onClick={() => handleClick(i)} />;
-  };
+          setBoardState(updatedBoardState);
+          checkWin(updatedBoardState, player);
+        }}
+      >
+        {column + 1}
+      </button>
+    );
+  }
 
   return (
-    <div>
-      <div className="board-row">
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-        {renderSquare(6)}
-      </div>
-      <div className="board-row">
-        {renderSquare(7)}
-        {renderSquare(8)}
-        {renderSquare(9)}
-        {renderSquare(10)}
-        {renderSquare(11)}
-        {renderSquare(12)}
-        {renderSquare(13)}
-      </div>
-      <div className="board-row">
-        {renderSquare(14)}
-        {renderSquare(15)}
-        {renderSquare(16)}
-        {renderSquare(17)}
-        {renderSquare(18)}
-        {renderSquare(19)}
-        {renderSquare(20)}
-      </div>
-      <div className="board-row">
-        {renderSquare(21)}
-        {renderSquare(22)}
-        {renderSquare(23)}
-        {renderSquare(24)}
-        {renderSquare(25)}
-        {renderSquare(26)}
-        {renderSquare(27)}
-      </div>
-      <div className="board-row">
-        {renderSquare(28)}
-        {renderSquare(29)}
-        {renderSquare(30)}
-        {renderSquare(31)}
-        {renderSquare(32)}
-        {renderSquare(33)}
-        {renderSquare(34)}
-      </div>
-      <div className="board-row">
-        {renderSquare(35)}
-        {renderSquare(36)}
-        {renderSquare(37)}
-        {renderSquare(38)}
-        {renderSquare(39)}
-        {renderSquare(40)}
-        {renderSquare(41)}
-      </div>
-    </div>
+    <>
+      {boardState.map((row, rowIndex) => (
+        <div key={`row-${rowIndex}`} style={{ display: 'flex' }}>
+          {row.map((column, columnIndex) => (
+            <div
+              key={`row-${columnIndex}`}
+              style={{
+                margin: '4px',
+                width: '40px',
+                height: '40px',
+                backgroundColor: column,
+                border: '1px solid black',
+              }}
+            >
+              {rowIndex} - {columnIndex}
+            </div>
+          ))}
+        </div>
+      ))}
+      {buttons}
+    </>
   );
-};
-
-export default Board;
+}
