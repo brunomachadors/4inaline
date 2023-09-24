@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
 import { checkWin } from '../../utils/checkWin';
+import {
+  RowUi,
+  ButtonUi,
+  ButtonsUi,
+  ColumnUi,
+  BoardUi,
+  ButtonImageUi,
+  Title,
+} from './style';
 
 export function Board({ numberOfColumns, numberOfRows }) {
   const [player, setPlayer] = useState('red');
@@ -12,15 +21,8 @@ export function Board({ numberOfColumns, numberOfRows }) {
   const buttons = [];
   for (let column = 0; column < numberOfColumns; column++) {
     buttons.push(
-      <button
+      <ButtonUi
         key={column}
-        style={{
-          margin: '4px',
-          padding: '0px',
-          width: '40px',
-          height: '40px',
-          cursor: 'pointer',
-        }}
         onClick={() => {
           setPlayer(player === 'red' ? 'green' : 'red');
           let updatedBoardState = structuredClone(boardState);
@@ -35,32 +37,32 @@ export function Board({ numberOfColumns, numberOfRows }) {
           checkWin(updatedBoardState, player);
         }}
       >
+        <ButtonImageUi src="https://cdn-icons-png.flaticon.com/512/55/55008.png"></ButtonImageUi>
         {column + 1}
-      </button>
+      </ButtonUi>
     );
   }
 
   return (
     <>
+      <Title>4 in a line</Title>
       {boardState.map((row, rowIndex) => (
-        <div key={`row-${rowIndex}`} style={{ display: 'flex' }}>
-          {row.map((column, columnIndex) => (
-            <div
-              key={`row-${columnIndex}`}
-              style={{
-                margin: '4px',
-                width: '40px',
-                height: '40px',
-                backgroundColor: column,
-                border: '1px solid black',
-              }}
-            >
-              {rowIndex} - {columnIndex}
-            </div>
-          ))}
-        </div>
+        <BoardUi>
+          <RowUi key={`row-${rowIndex}`}>
+            {row.map((column, columnIndex) => (
+              <ColumnUi
+                key={`row-${columnIndex}`}
+                style={{
+                  backgroundColor: column,
+                }}
+              >
+                {rowIndex} - {columnIndex}
+              </ColumnUi>
+            ))}
+          </RowUi>
+        </BoardUi>
       ))}
-      {buttons}
+      <ButtonsUi>{buttons}</ButtonsUi>
     </>
   );
 }
