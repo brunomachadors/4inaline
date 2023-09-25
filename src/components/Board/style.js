@@ -33,8 +33,7 @@ export const ColumnUi = styled.div`
 `;
 
 export const ButtonUi = styled.button`
-  margin: 4.5px;
-  padding: 0px;
+  margin: 5px;
   width: 40px;
   height: 40px;
   cursor: pointer;
@@ -88,4 +87,14 @@ export const PlayAgainButton = styled.button`
   align-items: center;
   margin: 10px auto;
   height: 30px;
+  background-color: blue;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10rem;
+  text-transform: uppercase;
+  font-size: 1rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 `;

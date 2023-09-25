@@ -17,18 +17,20 @@ import {
 import { createBoard } from '../../utils/createBoard';
 
 const PLAYER_COLORS = {
-  'Player 1': 'red',
-  'Player 2': 'green',
+  player1: 'red',
+  player2: 'green',
 };
+const debugMode = false;
 
 export function Board({ numberOfColumns, numberOfRows }) {
   const [winner, setWinner] = useState(null);
-  const [player, setPlayer] = useState('Player 1');
+  const [player, setPlayer] = useState('player1');
+  const buttons = [];
+
   const [boardState, setBoardState] = useState(() => {
     return createBoard(numberOfColumns, numberOfRows);
   });
 
-  const buttons = [];
   for (let column = 0; column < numberOfColumns; column++) {
     buttons.push(
       <ButtonUi
@@ -44,7 +46,7 @@ export function Board({ numberOfColumns, numberOfRows }) {
           }
 
           setBoardState(updatedBoardState);
-          setPlayer(player === 'Player 1' ? 'Player 2' : 'Player 1');
+          setPlayer(player === 'player1' ? 'player2' : 'player1');
           if (checkWin(updatedBoardState, player)) {
             setWinner(player);
           }
@@ -60,12 +62,12 @@ export function Board({ numberOfColumns, numberOfRows }) {
   };
 
   const startGame = () => {
-    setPlayer('Player 1');
+    setPlayer('player1');
     setWinner(null);
     setBoardState(createBoard(numberOfColumns, numberOfRows));
   };
 
-  const isGameDraw =
+  const draw =
     !winner &&
     boardState.every((row) => row.every((column) => column !== null));
 
@@ -92,7 +94,8 @@ export function Board({ numberOfColumns, numberOfRows }) {
                   backgroundColor: PLAYER_COLORS[column],
                 }}
               >
-                {rowIndex} - {columnIndex}
+                {debugMode ? rowIndex + ' - ' : null}
+                {debugMode ? columnIndex : null}
               </ColumnUi>
             ))}
           </RowUi>
@@ -105,9 +108,7 @@ export function Board({ numberOfColumns, numberOfRows }) {
       </PlayAgainButton>
 
       {winner && <WinnerTitle>The winner is {winner}!</WinnerTitle>}
-      {isGameDraw && (
-        <WinnerTitle>There were no winners, play again!</WinnerTitle>
-      )}
+      {draw && <WinnerTitle>There were no winners, play again!</WinnerTitle>}
     </>
   );
 }
