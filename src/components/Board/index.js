@@ -17,7 +17,7 @@ import {
 } from '../Player/style';
 import { Title } from '../Game/style';
 
-const debugMode = false;
+const debugMode = true;
 
 export function Board({ numberOfColumns, numberOfRows }) {
   const [winner, setWinner] = useState(null);
@@ -74,12 +74,20 @@ export function Board({ numberOfColumns, numberOfRows }) {
 
       <PlayerColor>
         Player 1 color:
-        <Player1ColorCircle />
+        <Player1ColorCircle
+          style={{
+            backgroundColor: PLAYER_COLORS.player1,
+          }}
+        />
       </PlayerColor>
 
       <PlayerColor>
         Player 2 color:
-        <Player2ColorCircle />
+        <Player2ColorCircle
+          style={{
+            backgroundColor: PLAYER_COLORS.player2,
+          }}
+        />
       </PlayerColor>
 
       {boardState.map((row, rowIndex) => (
@@ -91,8 +99,7 @@ export function Board({ numberOfColumns, numberOfRows }) {
                   backgroundColor: PLAYER_COLORS[column],
                 }}
               >
-                {debugMode ? rowIndex + ' - ' : null}
-                {debugMode ? columnIndex : null}
+                {debugMode ? rowIndex + ' - ' + columnIndex : null}
               </ColumnUi>
             ))}
           </RowUi>
