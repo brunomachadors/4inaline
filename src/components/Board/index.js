@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { checkWin } from '../../utils/checkWin';
-import { RowUi, ColumnUi, BoardUi } from './style';
 import { createBoard } from '../../utils/createBoard';
-import { PLAYER_COLORS } from '../../utils/playerColors';
+import { RowUi, ColumnUi, BoardUi } from './style';
 import {
   ButtonImageUi,
   ButtonUi,
@@ -16,8 +15,9 @@ import {
   WinnerTitle,
 } from '../Player/style';
 import { Title } from '../Game/style';
+import { PLAYER_COLORS } from '../../utils/playerColors';
 
-const debugMode = true;
+const debugMode = false;
 
 export function Board({ numberOfColumns, numberOfRows }) {
   const [winner, setWinner] = useState(null);
