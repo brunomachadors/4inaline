@@ -1,34 +1,33 @@
 import React, { useState } from 'react';
 import { checkWin } from '../../utils/checkWin';
+import { RowUi, ColumnUi, BoardUi } from './style';
+import { createBoard } from '../../utils/createBoard';
+import { PLAYER_COLORS } from '../../utils/playerColors';
 import {
-  RowUi,
-  ButtonUi,
-  ColumnUi,
-  BoardUi,
   ButtonImageUi,
-  Title,
-  WinnerTitle,
+  ButtonUi,
+  ButtonsContainer,
   PlayAgainButton,
-  PlayerColor,
+} from '../Buttons/style';
+import {
   Player1ColorCircle,
   Player2ColorCircle,
-  ButtonsContainer,
-} from './style';
-import { createBoard } from '../../utils/createBoard';
+  PlayerColor,
+  WinnerTitle,
+} from '../Player/style';
+import { Title } from '../Game/style';
 
-const PLAYER_COLORS = {
-  'Player 1': 'red',
-  'Player 2': 'green',
-};
+const debugMode = true;
 
 export function Board({ numberOfColumns, numberOfRows }) {
   const [winner, setWinner] = useState(null);
-  const [player, setPlayer] = useState('Player 1');
+  const [player, setPlayer] = useState('player1');
+  const buttons = [];
+
   const [boardState, setBoardState] = useState(() => {
     return createBoard(numberOfColumns, numberOfRows);
   });
 
-  const buttons = [];
   for (let column = 0; column < numberOfColumns; column++) {
     buttons.push(
       <ButtonUi
@@ -44,7 +43,7 @@ export function Board({ numberOfColumns, numberOfRows }) {
           }
 
           setBoardState(updatedBoardState);
-          setPlayer(player === 'Player 1' ? 'Player 2' : 'Player 1');
+          setPlayer(player === 'player1' ? 'player2' : 'player1');
           if (checkWin(updatedBoardState, player)) {
             setWinner(player);
           }
@@ -60,12 +59,12 @@ export function Board({ numberOfColumns, numberOfRows }) {
   };
 
   const startGame = () => {
-    setPlayer('Player 1');
+    setPlayer('player1');
     setWinner(null);
     setBoardState(createBoard(numberOfColumns, numberOfRows));
   };
 
-  const isGameDraw =
+  const draw =
     !winner &&
     boardState.every((row) => row.every((column) => column !== null));
 
@@ -75,12 +74,20 @@ export function Board({ numberOfColumns, numberOfRows }) {
 
       <PlayerColor>
         Player 1 color:
-        <Player1ColorCircle />
+        <Player1ColorCircle
+          style={{
+            backgroundColor: PLAYER_COLORS.player1,
+          }}
+        />
       </PlayerColor>
 
       <PlayerColor>
         Player 2 color:
-        <Player2ColorCircle />
+        <Player2ColorCircle
+          style={{
+            backgroundColor: PLAYER_COLORS.player2,
+          }}
+        />
       </PlayerColor>
 
       {boardState.map((row, rowIndex) => (
@@ -92,7 +99,7 @@ export function Board({ numberOfColumns, numberOfRows }) {
                   backgroundColor: PLAYER_COLORS[column],
                 }}
               >
-                {rowIndex} - {columnIndex}
+                {debugMode ? rowIndex + ' - ' + columnIndex : null}
               </ColumnUi>
             ))}
           </RowUi>
@@ -105,9 +112,7 @@ export function Board({ numberOfColumns, numberOfRows }) {
       </PlayAgainButton>
 
       {winner && <WinnerTitle>The winner is {winner}!</WinnerTitle>}
-      {isGameDraw && (
-        <WinnerTitle>There were no winners, play again!</WinnerTitle>
-      )}
+      {draw && <WinnerTitle>There were no winners, play again!</WinnerTitle>}
     </>
   );
 }
