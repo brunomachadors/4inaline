@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
 import { checkWin } from '../../utils/checkWin';
+import { RowUi, ColumnUi, BoardUi } from './style';
+import { createBoard } from '../../utils/createBoard';
+import { PLAYER_COLORS } from '../../utils/playerColors';
 import {
-  RowUi,
-  ButtonUi,
-  ColumnUi,
-  BoardUi,
   ButtonImageUi,
-  Title,
-  WinnerTitle,
+  ButtonUi,
+  ButtonsContainer,
   PlayAgainButton,
-  PlayerColor,
+} from '../Buttons/style';
+import {
   Player1ColorCircle,
   Player2ColorCircle,
-  ButtonsContainer,
-} from './style';
-import { createBoard } from '../../utils/createBoard';
+  PlayerColor,
+  WinnerTitle,
+} from '../Player/style';
+import { Title } from '../Game/style';
 
-const PLAYER_COLORS = {
-  player1: 'red',
-  player2: 'green',
-};
 const debugMode = false;
 
 export function Board({ numberOfColumns, numberOfRows }) {
