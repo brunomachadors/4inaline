@@ -11,7 +11,7 @@ export const Player1ColorCircle = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  margin-left: 10px;
+  margin-left: 2px;
   background-color: red;
   border: solid black 1px;
 `;
@@ -20,7 +20,7 @@ export const Player2ColorCircle = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  margin-left: 10px;
+  margin-left: 2px;
   background-color: green;
   border: solid black 1px;
 `;

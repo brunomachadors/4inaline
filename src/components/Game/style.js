@@ -16,10 +16,12 @@ export const Title = styled.h1`
 `;
 
 export const Rules = styled.footer`
-  font: 8px 'Century Gothic', Futura, sans-serif;
-  border: solid 1px black;
+  font: 10px 'Century Gothic', Futura, sans-serif;
+  border: solid 2px black;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 350px;
+  background-color: white;
+  padding: 5px;
 `;
