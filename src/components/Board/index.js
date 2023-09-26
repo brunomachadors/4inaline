@@ -90,6 +90,10 @@ export function Board({ numberOfColumns, numberOfRows }) {
         />
       </PlayerColor>
 
+      <PlayAgainButton onClick={handlePlayAgainClick}>
+        Play again
+      </PlayAgainButton>
+
       {boardState.map((row, rowIndex) => (
         <BoardUi>
           <RowUi>
@@ -106,10 +110,6 @@ export function Board({ numberOfColumns, numberOfRows }) {
         </BoardUi>
       ))}
       <ButtonsContainer>{buttons}</ButtonsContainer>
-
-      <PlayAgainButton onClick={handlePlayAgainClick}>
-        Play again
-      </PlayAgainButton>
 
       {winner && <WinnerTitle>The winner is {winner}!</WinnerTitle>}
       {draw && <WinnerTitle>There were no winners, play again!</WinnerTitle>}
