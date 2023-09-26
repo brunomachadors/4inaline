@@ -21,5 +21,5 @@ export const Rules = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 55%;
+  width: 350px;
 `;
