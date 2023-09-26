@@ -12,9 +12,10 @@ import {
   Player1ColorCircle,
   Player2ColorCircle,
   PlayerColor,
+  PlayerContainer,
   WinnerTitle,
 } from '../Player/style';
-import { Title } from '../Game/style';
+import { Rules, Title } from '../Game/style';
 import { PLAYER_COLORS } from '../../utils/playerColors';
 
 const debugMode = false;
@@ -72,23 +73,14 @@ export function Board({ numberOfColumns, numberOfRows }) {
     <>
       <Title>4 in a line</Title>
 
-      <PlayerColor>
-        Player 1 color:
-        <Player1ColorCircle
-          style={{
-            backgroundColor: PLAYER_COLORS.player1,
-          }}
-        />
-      </PlayerColor>
-
-      <PlayerColor>
-        Player 2 color:
-        <Player2ColorCircle
-          style={{
-            backgroundColor: PLAYER_COLORS.player2,
-          }}
-        />
-      </PlayerColor>
+      <Rules>
+        The four in a row rules are very simple. It’s always played with 2
+        players and in a 7x6 grid. Each turn each player puts a piece of his
+        color inside a column and it will fall until it reaches the lowest
+        available spot. The one who can put 4 pieces of the same color in a row
+        horizontally, vertically or diagonally wins. If no one manages to do it
+        then the match ends in a draw.
+      </Rules>
 
       <PlayAgainButton onClick={handlePlayAgainClick}>
         Play again
@@ -110,6 +102,26 @@ export function Board({ numberOfColumns, numberOfRows }) {
         </BoardUi>
       ))}
       <ButtonsContainer>{buttons}</ButtonsContainer>
+
+      <PlayerContainer>
+        <PlayerColor>
+          Player 1:
+          <Player1ColorCircle
+            style={{
+              backgroundColor: PLAYER_COLORS.player1,
+            }}
+          />
+        </PlayerColor>
+
+        <PlayerColor>
+          Player 2:
+          <Player2ColorCircle
+            style={{
+              backgroundColor: PLAYER_COLORS.player2,
+            }}
+          />
+        </PlayerColor>
+      </PlayerContainer>
 
       {winner && <WinnerTitle>The winner is {winner}!</WinnerTitle>}
       {draw && <WinnerTitle>There were no winners, play again!</WinnerTitle>}

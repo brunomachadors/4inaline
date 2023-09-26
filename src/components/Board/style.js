@@ -23,6 +23,6 @@ export const ColumnUi = styled.div`
   height: 40px;
   border: 1px solid black;
   background-color: white;
-  border-radius: 2cm;
+  border-radius: 50%;
   box-shadow: 3px 2px 2px black;
 `;
